@@ -1,0 +1,35 @@
+<h1>Add Course</h1>
+
+<form *ngIf="courseForm" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Course Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control">
+      <div *ngIf="courseForm.get('name')?.errors?.['required']" class="text-danger">
+        Course Name is required.
+      </div>
+      <div *ngIf="courseForm.get('name')?.errors?.['minlength']">Course Name must be at least 3 characters.</div>
+      <div *ngIf="courseForm.get('name')?.errors?.['maxlength']">Course Name cannot exceed 50 characters.</div>
+      <div *ngIf="courseForm.get('name')?.errors?.['noNumbers']">Course Name cannot contain numbers.</div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="courseForm.get('description')?.errors?.['required']" class="text-danger">
+        Description is required.
+      </div>
+      <div *ngIf="courseForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters.</div>
+      <div *ngIf="courseForm.get('description')?.errors?.['maxlength']">Description cannot exceed 200 characters.</div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" id="startDate" formControlName="startDate" class="form-control">
+      <div *ngIf="courseForm.get('startDate')?.errors?.['required']" class="text-danger">
+        Start Date is required.
+      </div>
+      <div *ngIf="courseForm.get('startDate')?.errors?.['futureDate']">Start Date must be in the future.</div>
+    </div>
+    
+    <button type="submit" [disabled]="!courseForm.valid" class="btn btn-primary">Submit</button>
+</form>

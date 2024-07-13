@@ -1,0 +1,17 @@
+<div>
+  <h1>Course List</h1>
+
+  <ul>
+    <li *ngFor="let course of courses" appHighlight>
+      <h2>{{ course.name | uppercase }}</h2>
+      <p>{{ course.description }}</p>
+      <p>Start Date: {{ course.startDate | date }}</p>
+      <p>Fee: {{ course.fee | currency:'INR':'symbol' }}</p>
+      <button *ngIf="!course.enrolled" (click)="enroll(course)">Enroll</button>
+      <button *ngIf="course.enrolled" (click)="drop(course)">Drop</button>
+      <p *ngIf="course.enrolled">You are enrolled in this course.</p>
+      <p *ngIf="!course.enrolled">Not enrolled yet.</p>
+    </li>
+  </ul>
+  <button routerLink="/add-course" class="btn btn-primary">Add Another Course</button>
+</div>

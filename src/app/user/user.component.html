@@ -1,0 +1,13 @@
+<div @fadeInOut>
+  <h1>User Information</h1>
+
+  <form>
+    <label for="userName">Enter Your Name:</label>
+    <input type="text" id="userName" name="userName" [(ngModel)]="userName">
+
+    <button type="button" (click)="resetName()">Clear</button>
+
+    <p *ngIf="userName">Hello, {{ userName }}!</p>
+    <p *ngIf="!userName">Please enter your name above.</p>
+  </form>
+</div>

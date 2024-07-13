@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <h1>Feedback Form</h1>
+    
+    <!-- Display this message only if the form has been submitted and is invalid -->
+    <div *ngIf="feedbackForm.submitted && !feedbackForm.valid" class="alert alert-danger">
+      Please fill out the form correctly before submitting.
+    </div>
+    
+    <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback(feedbackForm)">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" class="form-control" ngModel required minlength="3" maxlength="50">
+        <div *ngIf="feedbackForm.controls['name']?.errors?.['required']" class="text-danger">
+          Name is required.
+        </div>
+        <div *ngIf="feedbackForm.controls['name']?.errors?.['minlength']" class="text-danger">
+          Name must be at least 3 characters.
+        </div>
+        <div *ngIf="feedbackForm.controls['name']?.errors?.['maxlength']" class="text-danger">
+          Name cannot exceed 50 characters.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-control" ngModel required email>
+        <div *ngIf="feedbackForm.controls['email']?.errors?.['required']" class="text-danger">
+          Email is required.
+        </div>
+        <div *ngIf="feedbackForm.controls['email']?.errors?.['email']" class="text-danger">
+          Please enter a valid email address.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="feedback" class="form-label">Feedback</label>
+        <textarea id="feedback" name="feedback" class="form-control" rows="3" ngModel required minlength="10" maxlength="500"></textarea>
+        <div *ngIf="feedbackForm.controls['feedback']?.errors?.['required']" class="text-danger">
+          Feedback is required.
+        </div>
+        <div *ngIf="feedbackForm.controls['feedback']?.errors?.['minlength']" class="text-danger">
+          Feedback must be at least 10 characters.
+        </div>
+        <div *ngIf="feedbackForm.controls['feedback']?.errors?.['maxlength']" class="text-danger">
+          Feedback cannot exceed 500 characters.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!feedbackForm.valid">Submit</button>
+    </form>
+  </div>
+  
